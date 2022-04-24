@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="uz.gita.newsapp.ui.screens.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_favArticleFragment"
+            app:destination="@id/favArticleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="uz.gita.newsapp.ui.screens.ArticleFragment"
+        android:label="ArticleFragment"
+        tools:layout="@layout/fragment_article">
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_articleFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="uz.gita.newsapp.ui.screens.DetailsFragment"
+        android:label="DetailsFragment"
+        tools:layout="@layout/fragment_details">
+
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="author"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="imgUrl"
+            app:argType="string" />
+        <argument
+            android:name="readMoreUrl"
+            app:argType="string" />
+        <argument
+            android:name="time"
+            app:argType="string" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/favArticleFragment"
+        tools:layout="@layout/fragment_favourites"
+        android:name="uz.gita.newsapp.ui.screens.FavArticleFragment"
+        android:label="FavArticleFragment" >
+        <action
+            android:id="@+id/action_favArticleFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+</navigation>
