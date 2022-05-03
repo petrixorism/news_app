@@ -29,5 +29,6 @@ class FavArticlesViewModelImpl @Inject constructor(private val repository: NewsR
 
     override fun updateArticle(articleData: ArticleData) {
         updateArticleData = repository.update(articleData)
+
     }
 }

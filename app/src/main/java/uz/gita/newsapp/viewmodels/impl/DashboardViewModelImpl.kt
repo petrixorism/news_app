@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import uz.gita.newsapp.data.model.common.ArticleData
+import uz.gita.newsapp.data.source.local.Categories
 import uz.gita.newsapp.domain.repository.NewsRepository
 import uz.gita.newsapp.viewmodels.DashboardViewModel
 import javax.inject.Inject
@@ -15,7 +17,13 @@ class DashboardViewModelImpl @Inject constructor(
     ViewModel(), DashboardViewModel {
 
     override val categoriesLiveData = MutableLiveData(repository.getAllCategories())
-    override val openArticleLiveData= MutableLiveData<String>()
+    override val openArticleLiveData = MutableLiveData<String>()
+    override var oneArticleLiveData: LiveData<ArticleData> = MutableLiveData()
+
+
+    init {
+        oneArticleLiveData = repository.getOneArticle()
+    }
 
 
     override fun openArticleByCategory(category: String) {

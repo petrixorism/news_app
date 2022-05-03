@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/dashboardFragment">
+    app:startDestination="@id/dashboard2Fragment">
 
     <fragment
         android:id="@+id/dashboardFragment"
@@ -60,11 +60,31 @@
     </fragment>
     <fragment
         android:id="@+id/favArticleFragment"
-        tools:layout="@layout/fragment_favourites"
         android:name="uz.gita.newsapp.ui.screens.FavArticleFragment"
-        android:label="FavArticleFragment" >
+        android:label="FavArticleFragment"
+        tools:layout="@layout/fragment_favourites">
         <action
             android:id="@+id/action_favArticleFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboard2Fragment"
+        android:name="uz.gita.newsapp.ui.screens.Dashboard2Fragment"
+        android:label="Dashboard2Fragment"
+        tools:layout="@layout/fragment_dashboard2">
+        <action
+            android:id="@+id/action_dashboard2Fragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_dashboard2Fragment_to_favArticleFragment"
+            app:destination="@id/favArticleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsListFragment"
+        android:name="uz.gita.newsapp.ui.screens.NewsListFragment"
+        android:label="NewsListFragment" >
+        <action
+            android:id="@+id/action_newsListFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
 </navigation>

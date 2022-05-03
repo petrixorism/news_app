@@ -53,9 +53,9 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
             )
         }
 
-        adapter.setToggleClickListener {
-            viewModel.updateArticle(it)
-        }
+//        adapter.setToggleClickListener {
+//            viewModel.updateArticle(it)
+//        }
     }
 
 

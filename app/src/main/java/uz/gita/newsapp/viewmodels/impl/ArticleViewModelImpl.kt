@@ -15,12 +15,13 @@ class ArticleViewModelImpl @Inject constructor(private val repository: NewsRepos
 
     override val loadingLiveData: LiveData<Boolean> = repository.loadingState()
     override val backLiveData = MutableLiveData<Unit>()
-    override var updateArticleData:LiveData<Unit> = MutableLiveData()
+    override var updateArticleData: LiveData<Unit> = MutableLiveData()
     override var articlesLiveData: LiveData<List<ArticleData>> = MutableLiveData()
 
     override fun back() {
         backLiveData.value = Unit
     }
+
 
     override fun loadArticlesByCategory(category: String) {
         articlesLiveData = repository.loadNewsByCategory(category)

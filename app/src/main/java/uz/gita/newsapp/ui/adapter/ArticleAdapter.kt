@@ -1,7 +1,10 @@
 package uz.gita.newsapp.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +16,7 @@ import uz.gita.newsapp.databinding.ItemNewsBinding
 class ArticleAdapter : ListAdapter<ArticleData, ArticleAdapter.Holder>(ArticleCallback) {
 
     private var listener: ((ArticleData) -> Unit)? = null
-    private var toggleClick: ((ArticleData) -> Unit)? = null
+    private var toggleClick: ((ItemListenerData) -> Unit)? = null
 
     object ArticleCallback : DiffUtil.ItemCallback<ArticleData>() {
         override fun areItemsTheSame(oldItem: ArticleData, newItem: ArticleData): Boolean =
@@ -25,17 +28,18 @@ class ArticleAdapter : ListAdapter<ArticleData, ArticleAdapter.Holder>(ArticleCa
 
     inner class Holder(private val itemNewsBinding: ItemNewsBinding) :
         RecyclerView.ViewHolder(itemNewsBinding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind() {
             val item = getItem(bindingAdapterPosition)
-            itemNewsBinding.textAuthor.text = item.title
-            itemNewsBinding.textDescription.text = item.description
+            itemNewsBinding.newsTitleTv.text = item.title
+            itemNewsBinding.newsDateTv.text = item.time
 
             Glide
                 .with(itemNewsBinding.image)
                 .load(item.imageUrl)
                 .into(itemNewsBinding.image)
 
-            itemNewsBinding.btnFav.isChecked = item.isFav
+//            itemNewsBinding.btnFav.isChecked = item.isFav
         }
 
         init {
@@ -43,10 +47,12 @@ class ArticleAdapter : ListAdapter<ArticleData, ArticleAdapter.Holder>(ArticleCa
                 listener!!.invoke(getItem(bindingAdapterPosition))
             }
 
-            itemNewsBinding.btnFav.setOnClickListener {
+            itemNewsBinding.root.setOnLongClickListener {
                 val data = getItem(absoluteAdapterPosition)
                 data.isFav = !data.isFav
-                toggleClick!!.invoke(getItem(absoluteAdapterPosition))
+                toggleClick!!.invoke(ItemListenerData(itemNewsBinding.root, getItem(absoluteAdapterPosition)))
+
+                true
             }
         }
     }
@@ -59,7 +65,9 @@ class ArticleAdapter : ListAdapter<ArticleData, ArticleAdapter.Holder>(ArticleCa
     fun setItemClickListener(block: ((ArticleData) -> Unit)) {
         listener = block
     }
-    fun setToggleClickListener(block: ((ArticleData) -> Unit)) {
+
+    fun setItemOnLongClickListener(block: ((ItemListenerData) -> Unit)) {
         toggleClick = block
     }
 }
+data class ItemListenerData(val view: View, val data: ArticleData)

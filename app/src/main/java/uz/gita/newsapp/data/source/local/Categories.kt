@@ -20,4 +20,5 @@ object Categories {
         return categories
 
     }
+    const val ARG_OBJECT = "object"
 }

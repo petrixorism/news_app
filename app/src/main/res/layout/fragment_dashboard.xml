@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.screens.DashboardFragment">
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"

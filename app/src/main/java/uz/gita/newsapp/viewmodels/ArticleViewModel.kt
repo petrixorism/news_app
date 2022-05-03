@@ -13,6 +13,8 @@ interface ArticleViewModel {
 
     fun back()
 
+
+
     fun loadArticlesByCategory(category: String)
     fun updateArticle(articleData: ArticleData)
 
